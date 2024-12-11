@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIGNAN'S FOODS</title>
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5; /* Background color for the whole page */
+            color: #fff; /* White text color for readability */
+        }
+
+        header, footer {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        header h1, footer p {
+            margin: 0;
+        }
+
+        main, #mounika-page {
+            display: none; /* Initially hidden main content */
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 100vh; /* Ensure it covers the full viewport height */
+            background: url('https://wallpaperaccess.com/full/2720519.jpg') no-repeat center center fixed; /* Background image for main content */
+            background-size: cover;
+            padding: 20px;
+        }
+
+        section {
+            flex: 2;
+            width: 80%;
+            margin-bottom: 20px;
+        }
+
+        section h2 {
+            margin-bottom: 20px;
+        }
+
+        .product {
+            display: flex;
+            margin-bottom: 20px;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background for products */
+            padding: 10px;
+            border-radius: 8px;
+            width: 800px;
+            height: 250px;
+        }
+
+        .product img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        #search-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start; /* Align items to the top */
+            margin-top: 20px; /* Adjust margin to push it slightly down */
+            width: 80%;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        aside {
+            flex: 1;
+            width: 80%;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background for aside */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #cart-items {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        #cart-items li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            margin-top: 20px;
+        }
+
+        /* Welcome page styles */
+        #welcome-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://wallpaperscute.com/wp-content/uploads/2020/09/HD-Food-Backgrounds.jpg') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            color: #fff;
+            width: 100%; /* Full width */
+        }
+
+        #welcome-section h1 {
+            font-weight: bold; /* Make the heading bold */
+            margin-bottom: 20px;
+        }
+
+        #welcome-section p {
+            margin-bottom: 20px;
+        }
+
+        #welcome-section button {
+            padding: 10px 20px;
+            background-color: #664a27;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #welcome-section button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Search bar styles */
+        #search-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 80%;
+            align-items: flex-start;
+        }
+
+        #search-input {
+            padding: 10px;
+            width: 300px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        #search-button, #mic-button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        #search-button:hover, #mic-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Delivery details section */
+        #delivery-details {
+            display: none; /* Initially hidden */
+            width: 80%;
+            margin-bottom: 20px;
+        }
+
+        #delivery-form {
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background for form */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #delivery-form label {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        #delivery-form input[type="text"],
+        #delivery-form input[type="tel"],
+        #delivery-form textarea {
+            width: calc(100% - 22px); /* Adjust for padding */
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #delivery-form button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #delivery-form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Mounika's page styles */
+        #mounika-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #mounika-section {
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        #mounika-section h2 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="welcome-section">
+        <h1>WELCOME TO VIGNAN'S FOODS</h1>
+        <p>We offer a variety of traditional foods that bring back the taste of history.</p>
+        <button onclick="enterStore()">Enter Store</button>
+        <br>
+        <br>
+        <button onclick="showMounikaPage()">MOUNIKA</button>
+    </div>
+
+    <main>
+        <header>
+            <h1>VIGNAN'S FOODS</h1>
+        </header>
+
+        <!-- Search bar -->
+        <div id="search-bar">
+            <input type="text" id="search-input" placeholder="Search for products...">
+            <button id="search-button" onclick="searchProducts()">Search</button>
+            <button id="mic-button" onclick="startVoiceSearch()">🎤</button>
+        </div>
+
+        <!-- Products section -->
+        <section id="products">
+            <h2>Our Products</h2>
+            <div class="product">
+                <img src="https://i.ytimg.com/vi/5Zjkqc5gzGk/maxresdefault.jpg" alt="Product 1">
+                <div class="product-info">
+                    <h3>Jonna Rotte</h3>
+                    <p>These rottelu are prepared with atta or wheat flour, shaped into a triangle or circle,<br> and prepared similar to North Indian parathas but rolled thinner than parathas.</p>
+                    <p>Price: ₹100 (for 5 rotte)</p>
+                    <button onclick="addToCart('Jonna Rotte', 100)">Add to Cart</button>
+                </div>
+            </div>
+       
+            <div class="product">
+                <img src="https://i.pinimg.com/originals/1c/bc/b2/1cbcb2cf4427d94304c23e0c0f55fa7f.jpg" alt="Product 2">
+                <div class="product-info">
+                    <h3>Korra Buvva upma(Foxtail Millet Upma)</h3>
+                    <p>Foxtail Millet Upma is a healthy and delicious South Indian breakfast option made with foxtail millet. <br>It's a nutritious alternative to the traditional rava upma and is known for its light and fluffy texture.</p>
+                    <p>Price: ₹70 (for 1 plate)</p>
+                    <button onclick="addToCart('Korra Buvva upma', 70)">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="https://media.istockphoto.com/id/1360841247/photo/plate-of-traditional-south-indian-breakfast-idli-vada.jpg?s=1024x1024&w=is&k=20&c=fT5vVOxl9ayzwSzUTSldNV1LUaXwYP4DXD9WcqP_nZQ=" alt="Product 3">
+                <div class="product-info">
+                    <h3>Idli</h3>
+                    <p>Idli is a traditional South Indian breakfast dish made from fermented rice and urad dal batter. <br>These soft and fluffy steamed cakes are typically served with chutney and sambar, offering a nutritious and light meal.</p>
+                    <p>Price: ₹50 (for 1 plate)</p>
+                    <button onclick="addToCart('Idli', 50)">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart section -->
+        <aside>
+            <h2>Your Cart</h2>
+            <ul id="cart-items"></ul>
+            <p id="cart-total">Total: ₹0</p>
+            <button onclick="checkout()">Checkout</button>
+        </aside>
+
+        <!-- Delivery details section -->
+        <section id="delivery-details">
+            <h2>Delivery Details</h2>
+            <form id="delivery-form" onsubmit="submitDeliveryDetails(event)">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="3" required></textarea>
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <footer>
+            <p>&copy; 2023 VIGNAN'S FOODS. All rights reserved.</p>
+        </footer>
+    </main>
+
+   
+        <footer>
+            <p>&copy; 2023 VIGNAN'S FOODS. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Enter Store function to show main content and hide welcome section
+        function enterStore() {
+            document.querySelector('main').style.display = 'flex';
+            document.getElementById('welcome-section').style.display = 'none';
+            document.getElementById('mounika-page').style.display = 'none';
+        }
+
+        
+        // Add to Cart function
+        function addToCart(product, price) {
+            var cartItems = document.getElementById('cart-items');
+            var cartTotal = document.getElementById('cart-total');
+
+            // Create a new list item for the cart
+            var listItem = document.createElement('li');
+            listItem.textContent = product + ' - ₹' + price;
+            cartItems.appendChild(listItem);
+
+            // Update the cart total
+            var currentTotal = parseInt(cartTotal.textContent.replace('Total: ₹', ''));
+            var newTotal = currentTotal + price;
+            cartTotal.textContent = 'Total: ₹' + newTotal;
+        }
+
+        // Checkout function
+        function checkout() {
+            document.getElementById('delivery-details').style.display = 'block';
+            document.getElementById('products').style.display = 'none';
+        }
+
+        // Submit Delivery Details function
+        function submitDeliveryDetails(event) {
+            event.preventDefault();
+
+            var name = document.getElementById('name').value;
+            var address = document.getElementById('address').value;
+            var phone = document.getElementById('phone').value;
+
+            // For demonstration purposes, we'll just log the details to the console
+            console.log('Name:', name);
+            console.log('Address:', address);
+            console.log('Phone:', phone);
+
+            alert('Thank you for your order, ' + name + '! Your delivery details have been submitted.');
+
+            // Reset the form
+            document.getElementById('delivery-form').reset();
+        }
+
+        // Function to handle search functionality
+        function searchProducts() {
+            var searchTerm = document.getElementById('search-input').value.toLowerCase();
+            var products = document.querySelectorAll('.product');
+
+            products.forEach(function(product) {
+                var productName = product.querySelector('h3').textContent.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        // Function to handle voice search functionality (stub for now)
+        function startVoiceSearch() {
+            alert('Voice search is not yet implemented.');
+        }
+    </script>
+</body>
+</html>
